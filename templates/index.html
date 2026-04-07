@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRS | Next Gen Movie Recommendations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <main class="container">
+        <header class="header">
+            <h1>CINE<span class="highlight">SCOPE</span></h1>
+            <p>Discover your next cinematic obsession.</p>
+        </header>
+
+        <section class="search-section glass-panel">
+            <form id="recommend-form">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="movie-input" 
+                        list="movies-list" 
+                        placeholder="Search for a movie you love..."
+                        autocomplete="off"
+                        required
+                    />
+                    <datalist id="movies-list">
+                        {% for title in movie_titles %}
+                        <option value="{{ title }}"></option>
+                        {% endfor %}
+                    </datalist>
+                </div>
+                <button type="submit" id="search-btn">
+                    <span class="btn-text">Inspire Me</span>
+                    <div class="spinner hidden"></div>
+                </button>
+            </form>
+        </section>
+
+        <section id="results-wrapper" class="hidden">
+            <h2>Recommended for you</h2>
+            <div id="recommendations-grid" class="grid">
+                <!-- Recommendations will be injected here via JS -->
+            </div>
+        </section>
+        
+        <div id="error-message" class="hidden">
+            <p>Could not find recommendations. Please try another movie.</p>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
